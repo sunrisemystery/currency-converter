@@ -2,13 +2,13 @@ package com.joannagajzler;
 
 public class Conversion {
 
-    public Double convert(Position a, Position b, Double value) {
+    //This function converts given amount to wanted currency
+    public Double convert(Position input, Position output, Double amount) {
 
-        double aAverageExchangeRate = Double.parseDouble(a.getAverageExchangeRate().replace(',', '.'));
-        double bAverageExchangeRate = Double.parseDouble(b.getAverageExchangeRate().replace(',', '.'));
+        //changing commas to dots (XML file has commas in double values)
+        double inputAverageExchangeRate = Double.parseDouble(input.getAverageExchangeRate().replace(',', '.'));
+        double outputAverageExchangeRate = Double.parseDouble(output.getAverageExchangeRate().replace(',', '.'));
 
-        return aAverageExchangeRate * value * b.getConverter() / (bAverageExchangeRate * a.getConverter());
-
-
+        return inputAverageExchangeRate * amount * output.getConverter() / (outputAverageExchangeRate * input.getConverter());
     }
 }

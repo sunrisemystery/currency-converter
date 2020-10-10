@@ -19,6 +19,7 @@ public class Positions {
         if (index >= 0 && index < positionList.size()) {
             return positionList.get(index);
         }
+        //returning null to catch NullPointerException in case of choosing the list's index that don't exist.
         return null;
     }
 

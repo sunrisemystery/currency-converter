@@ -15,8 +15,8 @@ public class Position {
 
     @Override
     public String toString() {
-        return "Currency Name: '" + currencyName + '\'' +
-                ", Currency Code: '" + currencyCode + '\'';
+
+        return String.format("%-35s | %s",currencyName,currencyCode);
 
     }
 

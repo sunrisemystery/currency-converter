@@ -14,8 +14,14 @@ public class View {
     public void showAll() {
         System.out.println("List of available currencies:\n");
         int i = 0;
+        System.out.format("%-39s | %s\n","Currency Name","Currency Code");
+        System.out.println("--------------------------------------------------------");
         for (Position pos : positionsList.getPositionList()) {
-            System.out.println(i + ". " + pos.toString());
+            if (i < 10) {
+                System.out.println(i + ".  " + pos.toString());
+            } else {
+                System.out.println(i + ". " + pos.toString());
+            }
             i++;
         }
     }
