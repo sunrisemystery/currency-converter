@@ -1,14 +1,11 @@
 package com.joannagajzler;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Positions {
 
-    private List<Position> positionList;
-
-    public Positions(List<Position> positionList) {
-        this.positionList = positionList;
-    }
+    private List<Position> positionList = new ArrayList<>();
 
     public List<Position> getPositionList() {
         return positionList;
@@ -21,5 +18,4 @@ public class Positions {
         //returning null to catch NullPointerException in case of choosing the list's index that don't exist.
         return null;
     }
-
 }

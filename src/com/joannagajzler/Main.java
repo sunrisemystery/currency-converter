@@ -8,12 +8,11 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) {
 
-        Positions positionsList = null;
+        Positions positionsList = new Positions();
         XMLParser xmlParser = new XMLParser();
 
         try {
-            xmlParser.NIODownload();
-            positionsList = new Positions(xmlParser.parseXML());
+            xmlParser.parseXML(positionsList);
         } catch (ParserConfigurationException |
                 SAXException | IOException e) {
             e.printStackTrace();
@@ -22,8 +21,6 @@ public class Main {
         UserInterface userInterface = new UserInterface(positionsList);
         userInterface.menu();
 
-
     }
-
 
 }
