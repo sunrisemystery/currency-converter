@@ -3,18 +3,18 @@ package com.joannagajzler;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class View {
+public class UserInterface {
     private Positions positionsList;
     private Conversion convert = new Conversion();
 
-    public View(Positions positionsList) {
+    public UserInterface(Positions positionsList) {
         this.positionsList = positionsList;
     }
 
     public void showAll() {
         System.out.println("List of available currencies:\n");
         int i = 0;
-        System.out.format("%-39s | %s\n","Currency Name","Currency Code");
+        System.out.format("%-39s | %s\n", "Currency Name", "Currency Code");
         System.out.println("--------------------------------------------------------");
         for (Position pos : positionsList.getPositionList()) {
             if (i < 10) {
@@ -34,12 +34,23 @@ public class View {
         int outputCurrency = -1;
         double amount;
         while (!quit) {
-            System.out.println("Choose an action:\n\n" +
+            try {
+                System.out.println("Chosen input currency: " + positionsList.getPositionByIndex(inputCurrency).getCurrencyName());
+
+            } catch (NullPointerException e) {
+                System.out.println("Chosen input currency: none");
+            }
+            try {
+                System.out.println("Chosen output currency: " + positionsList.getPositionByIndex(outputCurrency).getCurrencyName());
+            } catch (NullPointerException e) {
+                System.out.println("Chosen output currency: none");
+            }
+
+            System.out.println("\nChoose an action:\n\n" +
                     "1. Show all currencies\n" +
                     "2. Choose input currency\n" +
                     "3. Choose output currency\n" +
                     "4. Convert\n" +
-                    "5. Show my choices\n" +
                     "6. Quit");
             try {
                 choice = scanner.nextInt();
@@ -53,11 +64,10 @@ public class View {
                     break;
 
                 case 2:
-                    System.out.println("Choose a number from a list:\n");
                     showAll();
+                    System.out.println("Choose a number from a list:\n");
                     try {
                         inputCurrency = scanner.nextInt();
-                        System.out.println("Chosen input currency: " + positionsList.getPositionByIndex(inputCurrency).getCurrencyName());
                     } catch (InputMismatchException | NullPointerException e) {
                         System.out.println("Chosen number is wrong.");
                         scanner.nextLine();
@@ -65,15 +75,14 @@ public class View {
                     break;
 
                 case 3:
-                    System.out.println("Choose a number from a list:\n");
                     showAll();
+                    System.out.println("Choose a number from a list:\n");
                     try {
                         outputCurrency = scanner.nextInt();
                     } catch (InputMismatchException | NullPointerException e) {
                         System.out.println("Chosen number is wrong.");
                         scanner.nextLine();
                     }
-                    System.out.println("Chosen output currency: " + positionsList.getPositionByIndex(outputCurrency).getCurrencyName());
                     break;
 
                 case 4:
@@ -90,21 +99,11 @@ public class View {
                     break;
 
                 case 5:
-                    try {
-                        System.out.println("Chosen input currency: " + positionsList.getPositionByIndex(inputCurrency).getCurrencyName());
-                        System.out.println("Chosen output currency: " + positionsList.getPositionByIndex(outputCurrency).getCurrencyName());
-                    } catch (NullPointerException e) {
-                        System.out.println("Input/output currency haven't been chosen");
-
-                    }
-                    break;
-
-                case 6:
                     quit = true;
                     break;
 
                 default:
-                    System.out.println("Choose a number from 1 to 6");
+                    System.out.println("Choose a number from 1 to 5");
             }
         }
     }

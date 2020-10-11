@@ -1,14 +1,13 @@
 package com.joannagajzler;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Positions {
 
-    private List<Position> positionList = new ArrayList<>();
+    private List<Position> positionList;
 
-    public void addToList(Position position) {
-        positionList.add(position);
+    public Positions(List<Position> positionList) {
+        this.positionList = positionList;
     }
 
     public List<Position> getPositionList() {

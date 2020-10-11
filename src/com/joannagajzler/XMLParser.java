@@ -7,6 +7,8 @@ import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 
 import java.io.File;
+import java.util.ArrayList;
+
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -22,12 +24,13 @@ import org.xml.sax.SAXException;
 
 public class XMLParser {
 
-    private final String absolutePath = System.getProperty("user.dir") + "\\nbpXML.xml";
-    private final Positions positionsList = new Positions();
+    private final static String absolutePath = System.getProperty("user.dir") + "\\nbpXML.xml";
+//       private final Positions positionsList = new Positions();
+
 
     public void NIODownload() throws IOException {
-        final String URL_STRING = "https://www.nbp.pl/kursy/xml/lasta.xml";
-        URL url = new URL(URL_STRING);
+        final String urlString = "https://www.nbp.pl/kursy/xml/lasta.xml";
+        URL url = new URL(urlString);
         ReadableByteChannel readableByteChannel = Channels.newChannel(url.openStream());
         FileOutputStream fileOutputStream = new FileOutputStream(this.absolutePath);
         fileOutputStream.getChannel().transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
@@ -36,7 +39,9 @@ public class XMLParser {
         readableByteChannel.close();
     }
 
-    public Positions parseXML() throws ParserConfigurationException, IOException, SAXException {
+    public ArrayList<Position> parseXML() throws ParserConfigurationException, IOException, SAXException {
+
+        ArrayList<Position> positionList = new ArrayList<>();
 
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
@@ -62,9 +67,10 @@ public class XMLParser {
                 String averageExchangeRate = element.getElementsByTagName("kurs_sredni")
                         .item(0).getChildNodes().item(0).getNodeValue();
 
-                positionsList.addToList(new Position(currencyName, converter, currencyCode, averageExchangeRate));
+//                positionsList.addToList(new Position(currencyName, converter, currencyCode, averageExchangeRate));
+                positionList.add(new Position(currencyName, converter, currencyCode, averageExchangeRate));
             }
         }
-        return positionsList;
+        return positionList;
     }
 }
