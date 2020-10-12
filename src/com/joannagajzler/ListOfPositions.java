@@ -3,7 +3,7 @@ package com.joannagajzler;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Positions {
+public class ListOfPositions {
 
     private List<Position> positionList = new ArrayList<>();
 

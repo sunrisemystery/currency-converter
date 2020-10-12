@@ -19,7 +19,7 @@ import org.xml.sax.SAXException;
 
 public class XMLParser {
 
-    public void parseXML(Positions positions) throws ParserConfigurationException, IOException, SAXException {
+    public void parseXML(ListOfPositions listOfPositions) throws ParserConfigurationException, IOException, SAXException {
 
         NIODownload.downloadXML();
 
@@ -47,7 +47,7 @@ public class XMLParser {
                 String averageExchangeRate = element.getElementsByTagName("kurs_sredni")
                         .item(0).getChildNodes().item(0).getNodeValue();
 
-                positions.getPositionList().add(new Position(currencyName, converter, currencyCode, averageExchangeRate));
+                listOfPositions.getPositionList().add(new Position(currencyName, converter, currencyCode, averageExchangeRate));
             }
         }
     }

@@ -4,11 +4,11 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class UserInterface {
-    private Positions positionsList;
+    private ListOfPositions listOfPositions;
     private Conversion convert = new Conversion();
 
-    public UserInterface(Positions positionsList) {
-        this.positionsList = positionsList;
+    public UserInterface(ListOfPositions listOfPositions) {
+        this.listOfPositions = listOfPositions;
     }
 
     private void showAll() {
@@ -16,7 +16,7 @@ public class UserInterface {
         int i = 0;
         System.out.format("%-39s | %s\n", "Currency Name", "Currency Code");
         System.out.println("--------------------------------------------------------");
-        for (Position pos : positionsList.getPositionList()) {
+        for (Position pos : listOfPositions.getPositionList()) {
             if (i < 10) {
                 System.out.println(i + ".  " + pos.toString());
             } else {
@@ -28,13 +28,13 @@ public class UserInterface {
 
     private void chosenCurrencies(int inputCurrency, int outputCurrency) {
         try {
-            System.out.println("Chosen input currency: " + positionsList.getPositionByIndex(inputCurrency).getCurrencyName());
+            System.out.println("Chosen input currency: " + listOfPositions.getPositionByIndex(inputCurrency).getCurrencyName());
 
         } catch (NullPointerException e) {
             System.out.println("Chosen input currency: none");
         }
         try {
-            System.out.println("Chosen output currency: " + positionsList.getPositionByIndex(outputCurrency).getCurrencyName());
+            System.out.println("Chosen output currency: " + listOfPositions.getPositionByIndex(outputCurrency).getCurrencyName());
         } catch (NullPointerException e) {
             System.out.println("Chosen output currency: none");
         }
@@ -56,12 +56,12 @@ public class UserInterface {
         double amount;
         try {
             System.out.println("Choose an amount of money to convert:");
-            System.out.print(positionsList.getPositionByIndex(inputCurrency).getCurrencyCode() + ": ");
+            System.out.print(listOfPositions.getPositionByIndex(inputCurrency).getCurrencyCode() + ": ");
             amount = scanner.nextDouble();
             System.out.println("-----------------------------------------------------------");
-            System.out.println(amount + " " + positionsList.getPositionByIndex(inputCurrency).getCurrencyCode() + " -> " +
-                    convert.convert(positionsList.getPositionByIndex(inputCurrency), positionsList.getPositionByIndex(outputCurrency), amount) + " " +
-                    positionsList.getPositionByIndex(outputCurrency).getCurrencyCode());
+            System.out.println(amount + " " + listOfPositions.getPositionByIndex(inputCurrency).getCurrencyCode() + " -> " +
+                    convert.convert(listOfPositions.getPositionByIndex(inputCurrency), listOfPositions.getPositionByIndex(outputCurrency), amount) + " " +
+                    listOfPositions.getPositionByIndex(outputCurrency).getCurrencyCode());
             System.out.println("-----------------------------------------------------------");
         } catch (NullPointerException e) {
             System.out.println("Input/output currency haven't been chosen");
