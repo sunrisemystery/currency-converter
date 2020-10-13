@@ -12,10 +12,13 @@ public class ListOfPositions {
     }
 
     public Position getPositionByIndex(int index) {
-        if (index >= 0 && index < positionList.size()) {
+
+        if (index < 0 || index >= positionList.size()) {
+            //throwing NullPointerException in case of choosing the index that doesn't exist in a list.
+            throw new NullPointerException();
+        } else {
             return positionList.get(index);
         }
-        //returning null to catch NullPointerException in case of choosing the list's index that don't exist.
-        return null;
+
     }
 }

@@ -45,6 +45,7 @@ public class UserInterface {
         System.out.println("Choose a number from a list:\n");
         try {
             currency = scanner.nextInt();
+            listOfPositions.getPositionByIndex(currency);
         } catch (InputMismatchException | NullPointerException e) {
             System.out.println("Chosen number is wrong.");
             scanner.nextLine();
@@ -55,6 +56,9 @@ public class UserInterface {
     private void convertCurrency(int inputCurrency, int outputCurrency, Scanner scanner) {
         double amount;
         try {
+            if (listOfPositions.getPositionByIndex(inputCurrency) == null || listOfPositions.getPositionByIndex(outputCurrency) == null) {
+                throw new NullPointerException();
+            }
             System.out.println("Choose an amount of money to convert:");
             System.out.print(listOfPositions.getPositionByIndex(inputCurrency).getCurrencyCode() + ": ");
             amount = scanner.nextDouble();
@@ -90,6 +94,7 @@ public class UserInterface {
             } catch (InputMismatchException e) {
                 System.out.println("Type an integer");
                 scanner.nextLine();
+                choice = -1;
             }
             switch (choice) {
                 case 1:
