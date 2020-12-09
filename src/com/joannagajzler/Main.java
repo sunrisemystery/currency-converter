@@ -18,6 +18,8 @@ public class Main {
         } catch (ParserConfigurationException |
                 SAXException | IOException e) {
             e.printStackTrace();
+            e.printStackTrace();
+            System.out.println("Alek");
         }
     }
 
