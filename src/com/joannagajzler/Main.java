@@ -17,9 +17,8 @@ public class Main {
             userInterface.menu();
         } catch (ParserConfigurationException |
                 SAXException | IOException e) {
-            e.printStackTrace();
-            e.printStackTrace();
-            System.out.println("Alek");
+            System.out.println("seba");
+
         }
     }
 
